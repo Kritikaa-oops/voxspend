@@ -19,9 +19,9 @@ struct Budget {
 };
 
 struct User {
-    string email;      // Changed from username to email
+    string email;
     string password;
-    string name;       // Added full name
+    string name;
 };
 
 #endif
