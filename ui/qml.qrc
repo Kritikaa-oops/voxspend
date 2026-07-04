@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/ui">
+        <file>main.qml</file>
+        <file>components/BudgetProgressBar.qml</file>
+        <file>components/CustomTextField.qml</file>
+        <file>components/ExpenseCard.qml</file>
+        <file>views/AddExpenseView.qml</file>
+        <file>views/DashboardView.qml</file>
+        <file>views/HistoryView.qml</file>
+    </qresource>
+</RCC>

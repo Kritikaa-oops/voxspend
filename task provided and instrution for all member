@@ -1,0 +1,949 @@
+VoxSpend Team Roles - Step by Step Explanation (No Code)
+Understanding the Team Structure
+Think of building a house:
+
+Frontend Team = Architects and Interior Designers (decide how it looks)
+
+Backend Team = Engineers and Plumbers (make it work properly)
+
+Storage Developer = Storage Room Manager (keeps everything organized)
+
+PART 1: FRONTEND TEAM (2 Members)
+Member 1: UI Screens Developer
+Role: "The Visual Designer"
+
+In Simple Words: This person builds everything the user sees on the screen. If the app were a website, this person designs every page, every button, every form, and makes it look beautiful.
+
+Step by Step What They Do:
+
+Week 1: Setting Up the Foundation
+
+Day 1-2: Open Qt Creator and create a new project. This is like opening a blank canvas.
+
+Day 3: Design the main window - this is the first screen users see when they open the app. They decide where the title goes, where the menu is, and what color scheme to use.
+
+Day 4-5: Design the sidebar navigation menu. This is the list of options like "Dashboard", "Add Expense", "Budget", etc.
+
+Week 2: Building Each Screen
+
+Day 1-2: Build the Dashboard screen - this shows a summary. They add boxes that will display total money spent, budget remaining, and small graphs.
+
+Day 3-4: Build the Add Expense form - this is like a digital receipt. They add text boxes where users type "Lunch" as description, a box to type amount like "12.50", a calendar to pick date, and a dropdown menu to select category like "Food" or "Travel".
+
+Day 5: Build the Edit Expense form - similar to Add Expense but with pre-filled information for when users want to change something.
+
+Week 3: Finishing All Screens
+
+Day 1-2: Build Budget screen - this shows how much money is left for each category. They add colorful progress bars that fill up as you spend more.
+
+Day 3-4: Build Reports screen - this shows charts and graphs. They add pie charts showing "You spent 40% on Food, 25% on Travel..." and bar charts showing monthly spending.
+
+Day 5: Build History screen - this shows all past expenses in a scrollable list, like a bank statement.
+
+Week 4: Making It Beautiful
+
+Day 1-2: Add colors, fonts, and icons. Make sure everything looks professional and consistent.
+
+Day 3: Add animations - like when you click a button, it smoothly transitions to the next screen.
+
+Day 4-5: Polish everything. Make sure buttons are big enough to click, text is readable, and screens look good on different screen sizes.
+
+What They DON'T Do:
+
+They don't write code that calculates totals
+
+They don't save data to files
+
+They don't check if you're spending too much
+
+How They Work With Others:
+
+They give their .ui files to Member 2 (UI Logic Developer) who connects the buttons to actual functionality
+
+They ask the backend team what information needs to be shown on each screen
+
+Member 2: UI Logic & Design Developer
+Role: "The Bridge Builder"
+
+In Simple Words: This person is the middleman. They connect the beautiful screens (made by Member 1) to the actual working parts (made by the backend team). They make sure when you click "Add Expense", the app actually saves your expense.
+
+Step by Step What They Do:
+
+Week 1: Planning the Connection
+
+Day 1-2: Study all the screens made by Member 1. Understand what each button is supposed to do.
+
+Day 3: Create a master plan of how everything connects. Draw a diagram showing: "When user clicks Add Expense → Get data from form → Send to backend → Show success message"
+
+Day 4-5: Define the rules for all forms. For example: "Amount cannot be negative. Description cannot be empty. Date must be valid."
+
+Week 2: Creating Controllers
+Think of controllers as traffic cops directing where information goes:
+
+Day 1-2: Create the main controller that manages the whole app. This decides which screen to show when you click different menu items.
+
+Day 3: Create the expense controller. This handles everything related to expenses:
+
+When you click "Add Expense", it collects all the data from the form
+
+Checks if data is valid (no negative amounts, etc.)
+
+Sends the data to the backend team's code
+
+Shows success or error message
+
+Day 4: Create the budget controller. This handles budget-related actions:
+
+When you set a budget, it sends it to the backend
+
+When you view budget status, it asks the backend for spending data
+
+Day 5: Create the report controller. This handles:
+
+When you click "Generate Report", it requests data from backend
+
+Formats the data into understandable charts
+
+Week 3: Connecting Everything
+
+Day 1-2: Connect all buttons to their actions. This is like wiring a light switch to a bulb:
+
+When you click "Add Expense" button → it triggers the controller
+
+When you click "View Reports" → it opens the reports screen
+
+Day 3-4: Make the app update automatically. When someone adds an expense:
+
+The dashboard should automatically update the total
+
+The history list should automatically show the new expense
+
+The budget bars should automatically fill up more
+
+Day 5: Add error handling. If something goes wrong:
+
+Show user-friendly messages like "Please enter a valid amount"
+
+Don't crash the app
+
+Week 4: Testing and Final Polish
+
+Day 1-2: Test every button, every form, every connection. Does "Add Expense" actually add? Does "Delete" actually delete?
+
+Day 3-4: Make the app fast and responsive. If something takes too long, show a loading message.
+
+Day 5: Review everything with the team. Make sure all connections work properly.
+
+What They DON'T DO:
+
+They don't design how screens look (Member 1 does that)
+
+They don't write the actual expense calculations (Backend does that)
+
+They don't save data to files (Storage Developer does that)
+
+How They Work With Others:
+
+They constantly talk to Member 1: "I need a button here. Can you add it?"
+
+They constantly talk to Backend: "Your addExpense function needs to return success or failure so I can show the user"
+
+They constantly talk to Storage: "After I save, tell me if it worked"
+
+PART 2: BACKEND TEAM (2 Members)
+Member 3: Core Expense Logic Developer (YOU)
+Role: "The Brain"
+
+In Simple Words: This person writes all the rules and calculations. If the app were a calculator, this person writes the math that happens when you press buttons. They don't care about colors or screens - they just care about making the numbers work correctly.
+
+Step by Step What They Do:
+
+Week 1: Creating the Data Structure
+Think of this as creating a filing system:
+
+Day 1-2: Design what an "Expense" looks like. Every expense has:
+
+A description (like "Lunch at restaurant")
+
+An amount (like $12.50)
+
+A date (when you spent it)
+
+A category (Food, Travel, etc.)
+
+A unique ID number (like 1, 2, 3...)
+
+Day 3: Create the list of categories. Decide what categories people can choose:
+
+Food, Travel, Utilities (electricity/water bills), Shopping, Entertainment, Healthcare, Education, Other
+
+Day 4: Define the rules for valid expenses:
+
+Amount must be greater than 0
+
+Description cannot be empty
+
+Date cannot be in the future
+
+Day 5: Test all these definitions. Make sure everything makes sense.
+
+Week 2: Building the Expense Manager
+This is like creating a smart filing cabinet that can organize and find expenses:
+
+Day 1-2: Write the "Add Expense" function:
+
+When someone gives you an expense, check if it's valid
+
+Give it a unique ID number
+
+Store it in your memory
+
+Return "Success" if it worked, "Failure" if it didn't
+
+Day 3: Write the "Edit Expense" function:
+
+When someone says "Change expense #5", find it
+
+Update the information with new data
+
+Check if the new data is valid
+
+Return success or failure
+
+Day 4: Write the "Delete Expense" function:
+
+When someone says "Remove expense #5", find and delete it
+
+Make sure it's completely gone
+
+Return success or failure
+
+Day 5: Write the "Get All Expenses" function:
+
+When someone asks, "Show me all expenses", give them the complete list
+
+Return the list in a organized way
+
+Week 3: Adding Calculation Features
+This is where you make the app smart:
+
+Day 1-2: Write the "Calculate Total Spent" function:
+
+Go through all expenses, add up all the amounts
+
+Return the total (like "You spent $350.50 total")
+
+Day 3: Write the "Calculate by Category" function:
+
+When someone asks "How much spent on Food?", add up only Food expenses
+
+Do this for every category
+
+Day 4: Write the "Get Monthly Report" function:
+
+When someone asks "Show me spending for January 2024", find all expenses in January
+
+Calculate totals by category for that month
+
+Return a neat report
+
+Day 5: Write search and filter functions:
+
+Search by description (find all expenses with "lunch" in description)
+
+Filter by category (show only Food expenses)
+
+Filter by date range (show expenses from Jan 1 to Jan 31)
+
+Week 4: Testing and Integration
+
+Day 1-2: Test every function. Add 100 expenses, delete some, edit some. Make sure totals are always correct.
+
+Day 3-4: Meet with other team members and make sure they can use your functions easily:
+
+Give the UI Logic developer clear instructions: "Call addExpense() with these parameters"
+
+Give the History developer a way to know when expenses change
+
+Give the Storage developer a way to get all expenses for saving
+
+Day 5: Final review and bug fixes.
+
+What They DON'T DO:
+
+They don't design screens
+
+They don't connect buttons to actions (UI Logic does that)
+
+They don't save to files (Storage does that)
+
+They don't show messages to users (UI Logic does that)
+
+How They Work With Others:
+
+They give their functions to Member 2 (UI Logic) who calls them
+
+They give their expense list to Member 5 (Storage) who saves it
+
+They give expense changes to Member 4 (History) who tracks them
+
+Member 4: History & Alarm Developer
+Role: "The Recorder and Watchman"
+
+In Simple Words: This person does two main things:
+
+Keeps a diary of everything that happens (History)
+
+Watches your spending and yells when you overspend (Alarm)
+
+Step by Step What They Do:
+
+Week 1: Building the History System
+History is like a diary that records everything:
+
+Day 1-2: Design what a history entry looks like:
+
+What happened? ("Added expense: Lunch $12.50")
+
+When did it happen? ("Jan 15, 2024 at 2:30 PM")
+
+Who did it? (if multiple users)
+
+What was the result? ("Successful" or "Failed")
+
+Day 3: Write the "Add to History" function:
+
+Whenever someone adds, edits, or deletes an expense
+
+Automatically record what happened
+
+Store it in order (latest first)
+
+Day 4: Write the "Get History" function:
+
+When someone asks "Show me what happened yesterday"
+
+Return all history entries for that day
+
+Day 5: Write the "Filter History" function:
+
+When someone wants to see only "Added Expense" entries
+
+Or only entries from the last week
+
+Filter accordingly
+
+Week 2: Building the Alarm System
+This is like a guard dog that watches your money:
+
+Day 1-2: Write the "Check Budget" function:
+
+Ask the Expense Manager (Member 3) how much you've spent
+
+Ask the Budget Manager what your limits are
+
+Compare: "You set $200 for Food. You've spent $180. You have $20 left."
+
+Day 3: Write the "Detect Overspending" function:
+
+If spent amount > budget limit, trigger an alarm
+
+Example: You spent $250 on Food when budget is $200 → ALARM!
+
+Day 4: Write the "Trigger Alert" function:
+
+When overspending is detected, create an alert message
+
+"WARNING: You've exceeded your Food budget by $50!"
+
+Send this message to be displayed on screen
+
+Day 5: Write the "Check All Categories" function:
+
+Check every category: Food, Travel, Utilities, etc.
+
+Generate alerts for any that are over budget
+
+Week 3: Adding Advanced Features
+
+Day 1-2: Add notification settings:
+
+Allow users to set alerts at 80% of budget (warning)
+
+Allow users to set alerts at 100% (critical)
+
+Example: "You've used 80% of your Food budget. Be careful!"
+
+Day 3-4: Add budget monitoring:
+
+Continuously track spending
+
+When an expense is added, immediately check if any budget is broken
+
+If broken, send alert to UI to show warning
+
+Day 5: Add summary reports:
+
+"This month you overspent on Food and Entertainment"
+
+"You saved money on Travel"
+
+Week 4: Testing and Refining
+
+Day 1-2: Test with fake data. Add expenses until you break budgets. Make sure alarms trigger correctly.
+
+Day 3: Test with real scenarios. What happens if user sets budget to $0? What happens if they spend exactly the budget amount?
+
+Day 4: Make sure alerts are shown nicely. Work with UI team to make warnings look professional.
+
+Day 5: Final testing and integration with all other parts.
+
+What They DON'T DO:
+
+They don't calculate totals (Expense Manager does that)
+
+They don't save to files (Storage does that)
+
+They don't show alerts on screen (UI Logic does that)
+
+How They Work With Others:
+
+They watch what Expense Manager does (Member 3)
+
+They tell UI Logic when to show alerts (Member 2)
+
+They tell Storage to save alerts (Member 5)
+
+PART 3: DATA STORAGE TEAM (1 Member)
+Member 5: Data Storage Developer
+Role: "The Archivist"
+
+In Simple Words: This person is responsible for saving everything so nothing is lost. When you close the app and open it again, all your expenses should still be there. They handle the saving and loading of all data.
+
+Step by Step What They Do:
+
+Week 1: Setting Up the Storage System
+Think of this as setting up a filing cabinet with labeled folders:
+
+Day 1-2: Set up the JSON library. JSON is like a simple text format that looks like:
+
+text
+{
+  "id": 1,
+  "description": "Lunch",
+  "amount": 12.50,
+  "category": "Food"
+}
+This is like writing information on index cards.
+
+Day 3: Create the JSON Manager - this is the person who knows where everything goes:
+
+Where to save expenses.json file
+
+How to open it
+
+How to close it properly
+
+Day 4: Write the "Save Expenses" function:
+
+Take all expenses from Expense Manager (Member 3)
+
+Convert each expense to JSON format
+
+Write all JSON to a file called "expenses.json"
+
+Day 5: Write the "Load Expenses" function:
+
+Open the "expenses.json" file
+
+Read all the JSON data
+
+Convert each JSON back into an Expense object
+
+Give all expenses back to Expense Manager
+
+Week 2: Adding More Storage Features
+
+Day 1-2: Write the "Save Budget" function:
+
+Take all budget settings (like "Food budget: $200")
+
+Save them to a file (or same JSON file)
+
+When app opens, load these settings
+
+Day 3: Write the "Auto-Save" feature:
+
+Whenever user adds an expense, automatically save to file
+
+This way, if the app crashes, nothing is lost
+
+Day 4: Write the "Save on Exit" feature:
+
+When user closes the app, save everything
+
+If auto-save is already working, this is extra safety
+
+Day 5: Add file error handling:
+
+What if the file doesn't exist? Create a new one.
+
+What if the file is corrupted? Create a backup.
+
+What if there's no space on the computer? Show a warning.
+
+Week 3: Making Storage Robust
+
+Day 1-2: Add backup system:
+
+Before saving, make a copy of the old file
+
+Name it "expenses_backup.json"
+
+If anything goes wrong, you can restore from backup
+
+Day 3-4: Add data validation:
+
+When loading data, check if it's correct
+
+Does each expense have all required fields?
+
+Is the amount a number? Is the date valid?
+
+Day 5: Add export/import features:
+
+Export expenses to CSV (Excel format)
+
+This allows users to open expenses in Excel
+
+Import from CSV if users want to add many expenses at once
+
+Week 4: Testing and Final Polish
+
+Day 1-2: Test everything:
+
+Add expenses, close app, reopen - are they still there?
+
+Delete expenses, close app, reopen - are they gone?
+
+Change budgets, close app, reopen - are the new budgets saved?
+
+Day 3: Test error scenarios:
+
+Delete the JSON file manually - does the app recreate it?
+
+Put garbage text in JSON - does the app handle it gracefully?
+
+Fill the hard drive - does the app show a warning?
+
+Day 4: Optimize performance:
+
+If you have 1000 expenses, saving should be fast
+
+Loading should not freeze the app
+
+Day 5: Final integration with all other members.
+
+What They DON'T DO:
+
+They don't calculate anything (Expense Manager does that)
+
+They don't show screens (UI Screens does that)
+
+They don't track history (History Manager does that)
+
+How They Work With Others:
+
+They get expenses from Expense Manager (Member 3) to save
+
+They give expenses back to Expense Manager when loading
+
+They save budget settings from Budget Manager
+
+They save history from History Manager
+
+PART 4: HOW EVERYONE WORKS TOGETHER
+Real Example: Adding an Expense
+Step 1: User Interaction
+
+User opens the app (Member 1 designed this screen)
+
+User clicks "Add Expense" button (Member 1 designed this button)
+
+A form appears (Member 1 designed this form)
+
+User fills in:
+
+Description: "Lunch at Pizza Place"
+
+Amount: "$15.50"
+
+Date: "Jan 15, 2024"
+
+Category: "Food"
+
+User clicks "Save" button (Member 1 designed this button)
+
+Step 2: UI Logic Takes Over (Member 2)
+
+The "Save" button click is detected
+
+Member 2's code wakes up and says: "I need to process this"
+
+First, it checks: Is the description empty? No, it has "Lunch at Pizza Place"
+
+Second, it checks: Is the amount positive? Yes, it's $15.50
+
+Third, it checks: Is the date valid? Yes, Jan 15, 2024
+
+Everything is valid! Now it creates an expense object with this data
+
+Step 3: Core Logic Takes Over (Member 3 - YOU)
+
+Member 2 calls your function: "Please add this expense"
+
+Your code receives the expense
+
+You give it a unique ID (like 45)
+
+You store it in your internal list
+
+You calculate: "Now total spent is $650.50"
+
+You return "Success" back to Member 2
+
+Step 4: History & Alarm (Member 4)
+
+You tell Member 4: "I just added an expense"
+
+Member 4 records in history: "Jan 15, 2024 at 2:30 PM - Added expense: Lunch at Pizza Place ($15.50)"
+
+Member 4 checks budgets: "Food budget is $200. Spent so far is $180. After adding $15.50, spent is $195.50"
+
+Member 4 checks: Is $195.50 > $200? No, so no alarm
+
+Step 5: Storage (Member 5)
+
+You tell Member 5: "I have new expenses, please save them"
+
+Member 5 takes all expenses from you
+
+Converts them to JSON format
+
+Writes to expenses.json file
+
+Returns "Saved successfully"
+
+Step 6: UI Updates (Member 1 & 2)
+
+Member 2 receives the "Success" from you
+
+Member 2 tells Member 1's UI: "Show success message to user"
+
+Member 1's screen shows: "Expense added successfully!"
+
+Member 2 updates the dashboard:
+
+Total spent increases from $635 to $650.50
+
+Food category spending increases
+
+Budget bar for Food fills up a little more
+
+History list shows the new expense
+
+Summary: Who Does What When Adding an Expense
+Step	Who	What They Do
+1	UI Screens	Shows the form, collects user input
+2	UI Logic	Validates the input, prepares data
+3	Core Logic (YOU)	Adds expense to memory, calculates totals
+4	History & Alarm	Records what happened, checks budgets
+5	Data Storage	Saves everything to file
+6	UI Logic & Screens	Updates the display with new information
+PART 5: TYPICAL DAY FOR EACH MEMBER
+A Day in Your Life (Member 3 - Core Logic)
+9:00 AM: Standup meeting with team
+
+You say: "Yesterday I finished the addExpense function. Today I'll work on editExpense."
+
+Team says: "Great, we need editExpense by Friday."
+
+9:15 AM: Write code for editExpense
+
+You think: "When someone edits an expense, I need to find the expense by its ID, update the information, and make sure the new data is valid."
+
+11:00 AM: Testing your editExpense
+
+You try: Add an expense, then edit it
+
+Check: Does the amount update correctly? Does the description change?
+
+Fix any bugs you find
+
+12:00 PM: Lunch break
+
+1:00 PM: Meet with UI Logic Developer (Member 2)
+
+They ask: "When I call your editExpense function, how do I know if it worked?"
+
+You explain: "I return true if it worked, false if it didn't. Also, if it fails, I'll tell you why."
+
+1:30 PM: Continue coding
+
+You add: deleteExpense function
+
+You add: getExpenseById function
+
+3:00 PM: Meet with Storage Developer (Member 5)
+
+They ask: "How do I get all expenses to save?"
+
+You explain: "Call my getAllExpenses() function, it returns a list of all expenses."
+
+3:30 PM: Push your code to GitHub
+
+You commit: "Added editExpense and deleteExpense functions"
+
+4:00 PM: Review another team member's code
+
+You check: Did they follow the team's coding style?
+
+You leave comments: "This looks good, but maybe rename this variable for clarity."
+
+5:00 PM: End of day
+
+You note: "Tomorrow I'll work on calculating totals by category."
+
+A Day in Life of UI Screens Developer (Member 1)
+9:00 AM: Standup - "I'm finishing the Reports screen today."
+
+9:15 AM: Open Qt Designer
+
+Drag and drop a pie chart widget
+
+Add labels: "Category Breakdown"
+
+Make it colorful
+
+11:00 AM: Create the budget progress bars
+
+Add colored bars that fill up as you spend
+
+Green if under budget, yellow if close, red if over
+
+1:00 PM: Test the design with fake data
+
+Does it look good? Are colors readable?
+
+Are the progress bars the right size?
+
+2:00 PM: Meet with UI Logic Developer
+
+They say: "I need a button here to export reports"
+
+You add: An "Export to CSV" button on the Reports screen
+
+4:00 PM: Polish the design
+
+Align everything properly
+
+Add consistent spacing
+
+Make sure all text is readable
+
+A Day in Life of UI Logic Developer (Member 2)
+9:00 AM: Standup - "Connecting the Reports screen today."
+
+9:15 AM: Write the ReportController
+
+When someone clicks "Generate Report", you call Core Logic's function
+
+11:00 AM: Connect the "Export" button
+
+When user clicks Export, you call Storage Developer's export function
+
+1:00 PM: Test the connections
+
+Click Generate Report → Does it show data?
+
+Click Export → Does it create a CSV file?
+
+3:00 PM: Fix bugs
+
+The dashboard is not updating when expenses change
+
+You track down the bug and fix it
+
+4:00 PM: Documentation
+
+Write down: "To add a new expense, call expenseController.addExpense()"
+
+This helps other team members understand your code
+
+A Day in Life of History & Alarm Developer (Member 4)
+9:00 AM: Standup - "Testing the alarm system today."
+
+9:15 AM: Test overspending detection
+
+Set Food budget to $100
+
+Add expenses totaling $120
+
+Does the alarm trigger? Yes!
+
+11:00 AM: Fix alarm bug
+
+Alarm wasn't triggering at exactly 100%
+
+You fix: ">= 100%" triggers alarm, not "> 100%"
+
+1:00 PM: Work with UI Logic Developer
+
+They need to display your alarm messages
+
+You create a clear message format: "WARNING: Exceeded Food budget by $20!"
+
+3:00 PM: Test history
+
+Add 10 expenses, check history list
+
+Delete 2 expenses, check if recorded
+
+Edit 3 expenses, check if recorded
+
+5:00 PM: Document your work
+
+"How the alarm system works: It checks budgets after every expense addition"
+
+A Day in Life of Data Storage Developer (Member 5)
+9:00 AM: Standup - "Testing auto-save today."
+
+9:15 AM: Test auto-save
+
+Add an expense, check if file updates
+
+It does! But it's slow
+
+11:00 AM: Optimize saving
+
+Save only when changes happen, not every second
+
+This makes the app faster
+
+1:00 PM: Add backup system
+
+Before saving, copy old file to backup
+
+If save fails, you can restore from backup
+
+3:00 PM: Test error handling
+
+Delete the JSON file manually
+
+App should recreate it automatically
+
+It does! Great.
+
+4:00 PM: Test loading
+
+Close app, reopen it
+
+All expenses are still there
+
+All budgets are still there
+
+5:00 PM: Prepare for integration
+
+Make sure all functions are ready for other team members
+
+PART 6: COMMON QUESTIONS
+Q: What if I don't understand someone else's code?
+A: Talk to them! Schedule a 15-minute meeting. Ask: "Can you walk me through your code?" This is normal in team projects.
+
+Q: What if my code breaks someone else's?
+A: This is why we have GitHub branches. Each person works in their own branch. We merge together after testing.
+
+Q: How do I know what the others are doing?
+A: Daily standup meetings. Every morning, everyone says what they're working on. Also, use a project board (like Trello or GitHub Projects) to track tasks.
+
+Q: What if two people need to edit the same file?
+A: This happens! In Git, when you try to pull someone else's changes, you might get a "merge conflict." You need to manually decide which changes to keep. The team lead usually helps with this.
+
+Q: What if I fall behind schedule?
+A: Speak up early! Tell your team: "I'm struggling with this part." They can help you or adjust the schedule.
+
+Q: How much should I talk to the team?
+A: More than you think! In school projects, students often don't talk enough. Send a message in the team chat daily. Ask questions. Share your progress.
+
+PART 7: TEAM COMMUNICATION TIPS
+Good Communication Habits
+Daily Check-ins: "Today I'll work on X, I need Y from someone"
+
+Ask Questions Early: Don't struggle for 3 days silently
+
+Share Progress: "I finished the addExpense function, testing now"
+
+Tell About Blockers: "I'm stuck because I can't figure out this error"
+
+Be Specific: Instead of "It doesn't work," say "The addExpense function returns false even with valid data"
+
+Document as You Go: Write comments in code so others understand
+
+Meeting Schedule
+Meeting	When	Duration	Purpose
+Daily Standup	Every morning	15 mins	What everyone is working on
+Weekly Planning	Monday	30 mins	Plan the week
+Integration Review	Friday	30 mins	Review all code together
+Emergency Meeting	As needed	15 mins	Solve urgent problems
+Communication Channels
+Discord/WhatsApp/Slack: Quick questions and daily updates
+
+GitHub: Code reviews and technical discussions
+
+Email: Formal communication and documentation
+
+In-person/Video: Complex discussions and problem-solving
+
+PART 8: CHECKLIST FOR SUCCESS
+For You (Member 3 - Core Logic)
+I understand exactly what my role is
+
+I know who to ask if I have questions
+
+I have all the software installed (Qt, Git, VS Code)
+
+I can access the GitHub repository
+
+I know how to create a branch
+
+I know how to commit and push
+
+I understand what the other team members are building
+
+I know how my code connects to theirs
+
+I have a schedule for what to do each day
+
+I know what to do if I get stuck
+
+For the Team
+Everyone understands their role
+
+Everyone has the required software
+
+Everyone has access to GitHub
+
+Team meeting schedule is set
+
+Communication channels are set up
+
+Project deadlines are clear
+
+Everyone knows how to get help
+
+Everyone tests their code before sharing
+
+Everyone reviews each other's code
+
+Everyone respects each other's work
+

@@ -8,7 +8,7 @@ vector<User> allUsers;
 User currentUser;
 static int nextId = 1;
 
-// ============ EXPENSE FUNCTIONS (MINIMAL - REQUIRED FOR COMPILATION) ============
+// ============ EXPENSE FUNCTIONS ============
 
 bool addExpense(const string& category, double amount, const string& date, const string& description) {
     if (amount <= 0) {
@@ -129,24 +129,31 @@ int generateNextId() {
     return nextId;
 }
 
-// ============ LOGIN/SIGNUP FUNCTIONS ============
+// ============ USER AUTHENTICATION FUNCTIONS (UPDATED) ============
 
-bool validateUsername(const string& username) {
-    if (username.length() < 3) {
-        cerr << "Error: Username must be at least 3 characters." << endl;
+bool validateEmail(const string& email) {
+    if (email.empty()) {
+        cerr << "Error: Email cannot be empty." << endl;
         return false;
     }
     
-    if (username.length() > 20) {
-        cerr << "Error: Username cannot exceed 20 characters." << endl;
+    if (email.length() > 100) {
+        cerr << "Error: Email too long." << endl;
         return false;
     }
     
-    for (char c : username) {
-        if (!isalnum(c) && c != '_') {
-            cerr << "Error: Username can only contain letters, numbers, and underscores." << endl;
-            return false;
-        }
+    // Check for @ symbol
+    size_t atPos = email.find('@');
+    if (atPos == string::npos) {
+        cerr << "Error: Invalid email format (missing @)." << endl;
+        return false;
+    }
+    
+    // Check for dot after @
+    string domain = email.substr(atPos);
+    if (domain.find('.') == string::npos) {
+        cerr << "Error: Invalid email format (missing domain)." << endl;
+        return false;
     }
     
     return true;
@@ -181,17 +188,17 @@ bool validatePassword(const string& password) {
     return true;
 }
 
-User* findUserByUsername(const string& username) {
+User* findUserByEmail(const string& email) {
     for (auto& user : allUsers) {
-        if (user.username == username) {
+        if (user.email == email) {
             return &user;
         }
     }
     return nullptr;
 }
 
-bool registerUser(const string& username, const string& password) {
-    if (!validateUsername(username)) {
+bool registerUser(const string& email, const string& password, const string& name) {
+    if (!validateEmail(email)) {
         return false;
     }
     
@@ -199,30 +206,36 @@ bool registerUser(const string& username, const string& password) {
         return false;
     }
     
-    if (findUserByUsername(username) != nullptr) {
-        cerr << "Error: Username already exists." << endl;
+    if (name.empty()) {
+        cerr << "Error: Name cannot be empty." << endl;
+        return false;
+    }
+    
+    if (findUserByEmail(email) != nullptr) {
+        cerr << "Error: Email already registered." << endl;
         return false;
     }
     
     User newUser;
-    newUser.username = username;
+    newUser.email = email;
     newUser.password = password;
+    newUser.name = name;
     allUsers.push_back(newUser);
     
-    cout << "User registered successfully: " << username << endl;
+    cout << "User registered successfully: " << email << " (" << name << ")" << endl;
     return true;
 }
 
-bool loginUser(const string& username, const string& password) {
-    if (username.empty() || password.empty()) {
-        cerr << "Error: Username and password cannot be empty." << endl;
+bool loginUser(const string& email, const string& password) {
+    if (email.empty() || password.empty()) {
+        cerr << "Error: Email and password cannot be empty." << endl;
         return false;
     }
     
-    User* user = findUserByUsername(username);
+    User* user = findUserByEmail(email);
     
     if (user == nullptr) {
-        cerr << "Error: Username not found." << endl;
+        cerr << "Error: Email not found." << endl;
         return false;
     }
     
@@ -232,18 +245,27 @@ bool loginUser(const string& username, const string& password) {
     }
     
     currentUser = *user;
-    cout << "Login successful! Welcome, " << username << "!" << endl;
+    cout << "Login successful! Welcome, " << user->name << "!" << endl;
     return true;
 }
 
 bool isUserLoggedIn() {
-    return !currentUser.username.empty();
+    return !currentUser.email.empty();
 }
 
 void logoutUser() {
     if (isUserLoggedIn()) {
-        cout << "Goodbye, " << currentUser.username << "!" << endl;
-        currentUser.username = "";
+        cout << "Goodbye, " << currentUser.name << "!" << endl;
+        currentUser.email = "";
         currentUser.password = "";
+        currentUser.name = "";
     }
+}
+
+string getCurrentUserName() {
+    return currentUser.name;
+}
+
+string getCurrentUserEmail() {
+    return currentUser.email;
 }
