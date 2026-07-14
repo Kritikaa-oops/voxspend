@@ -1,6 +1,7 @@
 #ifndef CATEGORY_CPP
 #define CATEGORY_CPP
 
+#include "TransactionManager.h"
 #include "../expense.h"
 #include <vector>
 #include <string>

@@ -4,30 +4,23 @@
 // ============ SHARED STRUCTS ============
 #include "expense.h"
 
-// ============ AUTHENTICATION MODULE ============
+// ============ AUTHENTICATION ============
+#include "auth/AuthManager.h"
 #include "auth/Login.cpp"
 #include "auth/Logout.cpp"
 #include "auth/Signup.cpp"
 #include "auth/EditProfile.cpp"
 
-// ============ EXPENSE MODULE ============
+// ============ EXPENSE ============
+#include "expense/ExpenseManager.h"
 #include "expense/AddExpense.cpp"
 
-// ============ TRANSACTION MODULE ============
+// ============ TRANSACTION ============
+#include "transaction/TransactionManager.h"
 #include "transaction/Transaction.cpp"
-#include "transaction/Charts.cpp"
-#include "transaction/Category.cpp"
 
-// ============ HOMEPAGE MODULE ============
+// ============ HOMEPAGE ============
+#include "HomePage.h"
 #include "HomePage.cpp"
-
-// ============ GLOBAL DATA DECLARATIONS ============
-extern vector<User> g_users;
-extern User g_currentUser;
-extern string g_lastAuthError;
-
-extern vector<Expense> g_expenses;
-extern int g_nextId;
-extern string g_lastExpenseError;
 
 #endif

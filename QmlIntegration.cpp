@@ -2,25 +2,10 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <map>
 
 using namespace std;
 
-// ============================================================
-// GLOBAL DATA DEFINITIONS
-// ============================================================
 
-vector<User> g_users;
-User g_currentUser;
-string g_lastAuthError = "";
-
-vector<Expense> g_expenses;
-int g_nextId = 1;
-string g_lastExpenseError = "";
-
-// ============================================================
-// AUTHENTICATION FUNCTIONS
-// ============================================================
 
 bool loginUser(const char* email, const char* password) {
     return ::loginUser(string(email), string(password));
@@ -67,10 +52,6 @@ bool registerUser(const char* name, const char* email, const char* password, con
     return ::registerUser(string(name), string(email), string(password), string(confirmPassword));
 }
 
-bool registerUserWithPhone(const char* name, const char* phone, const char* password, const char* confirmPassword) {
-    return ::registerUserWithPhone(string(name), string(phone), string(password), string(confirmPassword));
-}
-
 bool updateUserProfile(const char* newName, const char* newEmail) {
     return ::updateUserProfile(string(newName), string(newEmail));
 }
@@ -100,20 +81,8 @@ bool deleteExpense(int id) {
     return ::deleteExpense(id);
 }
 
-bool editExpense(int id, const char* title, double amount, const char* category, const char* date, const char* note) {
-    return ::editExpense(id, string(title), amount, string(category), string(date), string(note));
-}
-
 vector<Expense> getExpenses() {
     return ::getExpenses();
-}
-
-vector<Expense> searchExpenses(const char* keyword) {
-    return ::searchExpenses(string(keyword));
-}
-
-vector<Expense> filterExpensesByCategory(const char* category) {
-    return ::filterExpensesByCategory(string(category));
 }
 
 int getExpenseCount() {
@@ -140,10 +109,6 @@ vector<pair<string, double>> getCategoryWiseSummary() {
     return ::getCategoryWiseSummary();
 }
 
-vector<CategoryChartData> getCategoryChartData() {
-    return ::getCategoryChartData();
-}
-
 double getHighestExpense() {
     return ::getHighestExpense();
 }
@@ -156,24 +121,8 @@ string getHighestCategory() {
     return ::getHighestCategory();
 }
 
-StatisticsData getStatisticsData() {
-    return ::getStatisticsData();
-}
-
-vector<double> getDistributionPercentages() {
-    return ::getDistributionPercentages();
-}
-
-vector<string> getCategoryNames() {
-    return ::getCategoryNames();
-}
-
-vector<string> getCategoryColors() {
-    return ::getCategoryColors();
-}
-
-vector<pair<string, double>> getLastSixMonthsSpending() {
-    return ::getLastSixMonthsSpending();
+vector<CategoryChartData> getCategoryChartData() {
+    return ::getCategoryChartData();
 }
 
 // ============================================================
@@ -191,27 +140,6 @@ double getCategoryAmount(const char* category) {
 const char* getFormattedCategoryAmountQml(const char* category) {
     static string formatted = ::getFormattedCategoryAmount(string(category));
     return formatted.c_str();
-}
-
-bool hasCategoryExpenses(const char* category) {
-    return ::hasCategoryExpenses(string(category));
-}
-
-vector<string> getUniqueCategories() {
-    return ::getUniqueCategories();
-}
-
-int getCategoryCount() {
-    return ::getCategoryCount();
-}
-
-double getCategoryPercentage(const char* category) {
-    return ::getCategoryPercentage(string(category));
-}
-
-const char* getCategoryColor(const char* category) {
-    static string color = ::getCategoryColor(string(category));
-    return color.c_str();
 }
 
 const char* getTopCategoryQml() {
@@ -273,11 +201,6 @@ const char* getUserDisplayEmailQml() {
     return email.c_str();
 }
 
-const char* getTimeBasedGreetingQml() {
-    static string greeting = ::getTimeBasedGreeting();
-    return greeting.c_str();
-}
-
 const char* getFullGreetingQml() {
     static string greeting = ::getFullGreeting();
     return greeting.c_str();
@@ -290,14 +213,6 @@ DashboardSummary getDashboardSummary() {
 // ============================================================
 // MONTH RESET FUNCTIONS
 // ============================================================
-
-vector<MonthlyArchive> getMonthlyArchives() {
-    return ::getMonthlyArchives();
-}
-
-MonthlyArchive getMonthSummary(const char* month) {
-    return ::getMonthSummary(string(month));
-}
 
 double getPreviousMonthSpending() {
     return ::getPreviousMonthSpending();

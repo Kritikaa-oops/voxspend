@@ -1,6 +1,7 @@
 #ifndef CHARTS_CPP
 #define CHARTS_CPP
 
+#include "TransactionManager.h"
 #include "../expense.h"
 #include <vector>
 #include <string>
