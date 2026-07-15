@@ -1,0 +1,15 @@
+module com.voxspend.backend
+typeinfo appVoxSpend200.qmltypes
+prefer :/qt/qml/com/voxspend/backend/
+Main 1.0 Main.qml
+NavIcon 1.0 NavIcon.qml
+AddExpense 1.0 AddExpense.qml
+CategoryCard 1.0 CategoryCard.qml
+ChartsPage 1.0 ChartsPage.qml
+EditProfile 1.0 EditProfile.qml
+LoginPage 1.0 LoginPage.qml
+LogoutPage 1.0 LogoutPage.qml
+SignupPage 1.0 SignupPage.qml
+SummaryPage 1.0 SummaryPage.qml
+TransactionPage 1.0 TransactionPage.qml
+

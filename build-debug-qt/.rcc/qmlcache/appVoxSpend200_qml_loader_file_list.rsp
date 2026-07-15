@@ -1,0 +1,15 @@
+--resource
+C:/Users/Lenovo/Desktop/voxspend200/build-debug-qt/.qt/rcc/qmake_com_voxspend_backend.qrc
+--resource
+C:/Users/Lenovo/Desktop/voxspend200/build-debug-qt/.qt/rcc/appVoxSpend200_raw_qml_0.qrc
+/qt/qml/com/voxspend/backend/Main.qml
+/qt/qml/com/voxspend/backend/NavIcon.qml
+/qt/qml/com/voxspend/backend/AddExpense.qml
+/qt/qml/com/voxspend/backend/CategoryCard.qml
+/qt/qml/com/voxspend/backend/ChartsPage.qml
+/qt/qml/com/voxspend/backend/EditProfile.qml
+/qt/qml/com/voxspend/backend/LoginPage.qml
+/qt/qml/com/voxspend/backend/LogoutPage.qml
+/qt/qml/com/voxspend/backend/SignupPage.qml
+/qt/qml/com/voxspend/backend/SummaryPage.qml
+/qt/qml/com/voxspend/backend/TransactionPage.qml

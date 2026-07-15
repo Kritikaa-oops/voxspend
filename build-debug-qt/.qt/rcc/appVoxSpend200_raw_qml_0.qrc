@@ -1,0 +1,16 @@
+<RCC>
+  <qresource prefix="/qt/qml/com/voxspend/backend/">
+    <file alias="Main.qml">C:/Users/Lenovo/Desktop/voxspend200/Main.qml</file>
+    <file alias="NavIcon.qml">C:/Users/Lenovo/Desktop/voxspend200/NavIcon.qml</file>
+    <file alias="AddExpense.qml">C:/Users/Lenovo/Desktop/voxspend200/AddExpense.qml</file>
+    <file alias="CategoryCard.qml">C:/Users/Lenovo/Desktop/voxspend200/CategoryCard.qml</file>
+    <file alias="ChartsPage.qml">C:/Users/Lenovo/Desktop/voxspend200/ChartsPage.qml</file>
+    <file alias="EditProfile.qml">C:/Users/Lenovo/Desktop/voxspend200/EditProfile.qml</file>
+    <file alias="LoginPage.qml">C:/Users/Lenovo/Desktop/voxspend200/LoginPage.qml</file>
+    <file alias="LogoutPage.qml">C:/Users/Lenovo/Desktop/voxspend200/LogoutPage.qml</file>
+    <file alias="SignupPage.qml">C:/Users/Lenovo/Desktop/voxspend200/SignupPage.qml</file>
+    <file alias="SummaryPage.qml">C:/Users/Lenovo/Desktop/voxspend200/SummaryPage.qml</file>
+    <file alias="TransactionPage.qml">C:/Users/Lenovo/Desktop/voxspend200/TransactionPage.qml</file>
+  </qresource>
+</RCC>
+

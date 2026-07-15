@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="/qt/qml/com/voxspend/backend">C:/Users/Lenovo/Desktop/voxspend200/build-debug-qt/com/voxspend/backend</file>
+
+  </qresource>
+</RCC>

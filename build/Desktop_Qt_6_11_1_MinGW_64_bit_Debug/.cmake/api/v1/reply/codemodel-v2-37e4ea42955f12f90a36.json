@@ -1,0 +1,222 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "VoxSpend200",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "all_aotstats::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_aotstats-Debug-baa21dbc5cc143694ffb.json",
+					"name" : "all_aotstats",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint-Debug-eaaa3e65fb35a6203b7a.json",
+					"name" : "all_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_json-Debug-b0f8e917f683eb09f371.json",
+					"name" : "all_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_module-Debug-49a85bde570872674e8f.json",
+					"name" : "all_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmltyperegistrations::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmltyperegistrations-Debug-4217020d6ec3aa056dd6.json",
+					"name" : "all_qmltyperegistrations",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appVoxSpend200::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appVoxSpend200-Debug-47529ea41aafdb24266b.json",
+					"name" : "appVoxSpend200",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appVoxSpend200_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appVoxSpend200_autogen-Debug-3c3453f2d9bf31e832e6.json",
+					"name" : "appVoxSpend200_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appVoxSpend200_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appVoxSpend200_autogen_timestamp_deps-Debug-1cf1ad6bd69e7aeba403.json",
+					"name" : "appVoxSpend200_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appVoxSpend200_copy_qml::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appVoxSpend200_copy_qml-Debug-1cfd9c0865c6ce4a0b81.json",
+					"name" : "appVoxSpend200_copy_qml",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appVoxSpend200_copy_res::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appVoxSpend200_copy_res-Debug-b7343f902e2edc004ef9.json",
+					"name" : "appVoxSpend200_copy_res",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appVoxSpend200_qmlimportscan::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appVoxSpend200_qmlimportscan-Debug-af21d042c5f5839ca09b.json",
+					"name" : "appVoxSpend200_qmlimportscan",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appVoxSpend200_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appVoxSpend200_qmllint-Debug-e0a57081adbe509400d5.json",
+					"name" : "appVoxSpend200_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appVoxSpend200_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appVoxSpend200_qmllint_json-Debug-f027352d42abac0b2f47.json",
+					"name" : "appVoxSpend200_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appVoxSpend200_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appVoxSpend200_qmllint_module-Debug-7c96b1b24e00b95d49dc.json",
+					"name" : "appVoxSpend200_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appVoxSpend200_qmltyperegistration::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appVoxSpend200_qmltyperegistration-Debug-314e9d7fe7df867ecce5.json",
+					"name" : "appVoxSpend200_qmltyperegistration",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "clean_qml_context_properties::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-clean_qml_context_properties-Debug-2cbd9b52caffc49b40a6.json",
+					"name" : "clean_qml_context_properties",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dump_qml_context_properties::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dump_qml_context_properties-Debug-04845c268cd7b7a51c47.json",
+					"name" : "dump_qml_context_properties",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "generate_qmlls_build_ini_file::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-generate_qmlls_build_ini_file-Debug-a54247606f57f53d7c93.json",
+					"name" : "generate_qmlls_build_ini_file",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "module_appVoxSpend200_aotstats_target::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-module_appVoxSpend200_aotstats_target-Debug-6531bbc560d86b7936ce.json",
+					"name" : "module_appVoxSpend200_aotstats_target",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Lenovo/Desktop/voxspend200/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug",
+		"source" : "C:/Users/Lenovo/Desktop/voxspend200"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
