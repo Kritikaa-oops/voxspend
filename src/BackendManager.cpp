@@ -242,3 +242,18 @@ int BackendManager::getExpenseCount() const
     QSqlQuery query(QSqlDatabase::database(kConnectionName)); query.prepare("SELECT COUNT(*) FROM expenses WHERE user_id = ?"); query.addBindValue(m_currentUserId);
     return query.exec() && query.next() ? query.value(0).toInt() : 0;
 }
+
+void BackendManager::resetExpenses()
+{
+    if (m_currentUserId < 0) return;
+    QSqlQuery query(QSqlDatabase::database(kConnectionName));
+    query.prepare("DELETE FROM expenses WHERE user_id = ?");
+    query.addBindValue(m_currentUserId);
+    if (!query.exec()) {
+        qWarning() << "Expense reset failed:" << query.lastError();
+        return;
+    }
+    ++m_dataRevision;
+    emit dataChanged();
+    qInfo().noquote() << "Expenses reset for user" << m_currentUserId;
+}

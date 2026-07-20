@@ -1,0 +1,28 @@
+--bare
+-I
+C:/Users/dell/voxspend200/builds/GCC 13.1.0 x86_64-w64-mingw32/Debug
+-I
+C:/Users/dell/voxspend200/builds/GCC 13.1.0 x86_64-w64-mingw32/Debug/com/voxspend200/backend
+-I
+C:/Users/dell/voxspend200/builds/GCC 13.1.0 x86_64-w64-mingw32/Debug
+-I
+C:/Qt/6.11.1/mingw_64/qml
+--resource
+C:/Users/dell/voxspend200/builds/GCC 13.1.0 x86_64-w64-mingw32/Debug/.qt/rcc/qmake_com_voxspend200_backend.qrc
+--resource
+C:/Users/dell/voxspend200/builds/GCC 13.1.0 x86_64-w64-mingw32/Debug/.qt/rcc/appVoxSpend200_raw_qml_0.qrc
+--resource
+C:/Users/dell/voxspend200/builds/GCC 13.1.0 x86_64-w64-mingw32/Debug/.qt/rcc/appVoxSpend200_raw_qml_0_extra_qmldirs.qrc
+C:/Users/dell/voxspend200/qml/Main.qml
+C:/Users/dell/voxspend200/qml/NavIcon.qml
+C:/Users/dell/voxspend200/qml/AddExpense.qml
+C:/Users/dell/voxspend200/qml/CategoryCard.qml
+C:/Users/dell/voxspend200/qml/ChartsPage.qml
+C:/Users/dell/voxspend200/qml/EditProfile.qml
+C:/Users/dell/voxspend200/qml/LoginPage.qml
+C:/Users/dell/voxspend200/qml/LogoutPage.qml
+C:/Users/dell/voxspend200/qml/SignupPage.qml
+C:/Users/dell/voxspend200/qml/SummaryPage.qml
+C:/Users/dell/voxspend200/qml/TransactionPage.qml
+--json
+C:/Users/dell/voxspend200/builds/GCC 13.1.0 x86_64-w64-mingw32/Debug/appVoxSpend200_qmllint.json

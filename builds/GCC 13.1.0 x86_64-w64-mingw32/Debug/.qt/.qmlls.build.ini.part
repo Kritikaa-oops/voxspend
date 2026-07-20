@@ -1,0 +1,3 @@
+[C:<SLASH>Users<SLASH>dell<SLASH>voxspend200]
+importPaths="C:/Users/dell/voxspend200/builds/GCC 13.1.0 x86_64-w64-mingw32/Debug;C:/Users/dell/voxspend200/builds/GCC 13.1.0 x86_64-w64-mingw32/Debug/com/voxspend200/backend;C:/Qt/6.11.1/mingw_64/qml"
+resourceFiles="C:/Users/dell/voxspend200/builds/GCC 13.1.0 x86_64-w64-mingw32/Debug/.qt/rcc/qmake_com_voxspend200_backend.qrc;C:/Users/dell/voxspend200/builds/GCC 13.1.0 x86_64-w64-mingw32/Debug/.qt/rcc/appVoxSpend200_raw_qml_0.qrc;C:/Users/dell/voxspend200/builds/GCC 13.1.0 x86_64-w64-mingw32/Debug/.qt/rcc/appVoxSpend200_raw_qml_0_extra_qmldirs.qrc"

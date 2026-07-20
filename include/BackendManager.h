@@ -37,6 +37,7 @@ public:
     Q_INVOKABLE QVariantList getCategoryTotals() const;
     Q_INVOKABLE double getMonthlyTotal() const;
     Q_INVOKABLE int getExpenseCount() const;
+    Q_INVOKABLE void resetExpenses();
     int dataRevision() const { return m_dataRevision; }
 
 signals:
