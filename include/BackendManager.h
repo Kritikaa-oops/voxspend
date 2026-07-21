@@ -12,6 +12,8 @@ class QSqlDatabase;
 // Include your expense struct definition
 #include "expense.h"
 
+class IDataStore;
+
 class BackendManager : public QObject {
     Q_OBJECT
     Q_PROPERTY(int dataRevision READ dataRevision NOTIFY dataChanged)
@@ -45,7 +47,7 @@ signals:
 
 private:
     bool initializeDatabase();
-    QString passwordHash(const QString& password, const QString& salt) const;
+    IDataStore* m_dataStore = nullptr;
     QString m_databaseError;
     bool m_databaseReady = false;
     int m_currentUserId = -1;

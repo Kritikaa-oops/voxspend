@@ -13,6 +13,7 @@ set(CMAKE_AUTOMOC ON)
 set(PROJECT_SOURCES
     src/main.cpp
     src/BackendManager.cpp
+    src/DatabaseService.cpp
     src/QmlIntegration.cpp
     src/Login.cpp
     src/Logout.cpp
@@ -24,6 +25,7 @@ set(PROJECT_SOURCES
     src/Signup.cpp
     src/Transaction.cpp
     include/BackendManager.h
+    include/DatabaseService.h
     include/Category.h
     include/expense.h
 )

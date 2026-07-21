@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/qt/qml/com/voxspend200/backend/">
-    <file alias="qml/qmldir">C:/Users/dell/voxspend200/builds/GCC 13.1.0 x86_64-w64-mingw32/Debug/com/voxspend200/backend/qml/qmldir</file>
-  </qresource>
-</RCC>
-

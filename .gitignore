@@ -36,6 +36,7 @@ Thumbs.db
 
 # Qt-specific folders
 .qtc_clangd/
+builds/
 
 # Do not ignore the build directory itself, only generated files
 # build/
