@@ -1,1 +1,0 @@
-C:/Users/dell/voxspend200/builds/GCC 13.1.0 x86_64-w64-mingw32/Debug/appVoxSpend200_autogen/include/../6YEA5652QU/moc_BackendManager.cpp.json
