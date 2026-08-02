@@ -6,6 +6,9 @@
 
 using namespace std;
 
+// ==========================================
+// GLOBAL SESSION & STATE MANAGEMENT
+// ==========================================
 vector<User> g_users = {};
 User g_currentUser = {};
 string g_lastAuthError = "";
@@ -15,6 +18,7 @@ string g_lastExpenseError = "";
 
 namespace {
 
+// Helper function to centralize authentication error logging
 void setAuthError(const QString& message)
 {
     g_lastAuthError = message.toStdString();
@@ -23,8 +27,12 @@ void setAuthError(const QString& message)
 
 } // namespace
 
+// ==========================================
+// CONSTRUCTOR & DATABASE INITIALIZATION
+// ==========================================
 BackendManager::BackendManager(QObject* parent) : QObject(parent)
 {
+    // OOP Concept: Composition - Instantiating SQLite storage engine
     m_dataStore = new SQLiteDataStore();
     m_databaseReady = initializeDatabase();
 }
@@ -40,11 +48,18 @@ bool BackendManager::initializeDatabase()
     return m_databaseReady;
 }
 
+// ==========================================
+// USER AUTHENTICATION MODULE (SIGNUP / LOGIN)
+// ==========================================
+
+// Handles new user creation and persists records in SQLite
 bool BackendManager::signup(const QString& nameInput, const QString& emailInput, const QString& password, const QString& confirmPassword)
 {
     clearAuthError();
     const QString name = nameInput.trimmed();
     const QString email = emailInput.trimmed().toLower();
+    
+    // Input & Database availability validation
     if (!m_databaseReady) { setAuthError("Account storage is unavailable. " + m_databaseError); return false; }
     if (password != confirmPassword) { setAuthError("Passwords do not match."); return false; }
 
@@ -54,16 +69,21 @@ bool BackendManager::signup(const QString& nameInput, const QString& emailInput,
         setAuthError(errorMessage);
         return false;
     }
+
+    // Update active user session state
     g_currentUser.name = name.toStdString();
     g_currentUser.email = email.toStdString();
-    g_currentUser.password.clear();
+    g_currentUser.password.clear(); // Clear sensitive plain-text password from memory
     m_currentUserId = userId;
+    
+    // Notify QML frontend of data changes
     ++m_dataRevision;
     emit dataChanged();
     qInfo().noquote() << "Account created for" << email;
     return true;
 }
 
+// Authenticates user credentials against the database
 bool BackendManager::login(const QString& emailInput, const QString& password)
 {
     clearAuthError();
@@ -74,27 +94,46 @@ bool BackendManager::login(const QString& emailInput, const QString& password)
     QString userName;
     QString storedEmail;
     int userId = -1;
+    
     if (!m_dataStore->authenticateUser(email, password, userId, userName, storedEmail, errorMessage)) {
         setAuthError(errorMessage);
         return false;
     }
+    
+    // Set active session variables upon successful authentication
     m_currentUserId = userId;
     g_currentUser.name = userName.toStdString();
     g_currentUser.email = storedEmail.toStdString();
     g_currentUser.password.clear();
+    
+    // Trigger UI refresh signal
     ++m_dataRevision;
     emit dataChanged();
     qInfo().noquote() << "Sign in succeeded for" << email;
     return true;
 }
 
+// ==========================================
+// SESSION & ERROR ACCESSORS (QML BRIDGES)
+// ==========================================
 QString BackendManager::getLastAuthError() const { return QString::fromStdString(g_lastAuthError); }
 void BackendManager::clearAuthError() { g_lastAuthError.clear(); }
 bool BackendManager::isDatabaseReady() const { return m_databaseReady; }
 QString BackendManager::currentUserName() const { return QString::fromStdString(g_currentUser.name); }
 QString BackendManager::currentUserEmail() const { return QString::fromStdString(g_currentUser.email); }
-void BackendManager::logout() { m_currentUserId = -1; g_currentUser = {}; ++m_dataRevision; emit dataChanged(); qInfo() << "User signed out"; }
 
+// Clears active user session data on logout
+void BackendManager::logout() { 
+    m_currentUserId = -1; 
+    g_currentUser = {}; 
+    ++m_dataRevision; 
+    emit dataChanged(); 
+    qInfo() << "User signed out"; 
+}
+
+// ==========================================
+// USER PROFILE MANAGEMENT
+// ==========================================
 bool BackendManager::updateProfile(const QString& nameInput, const QString& emailInput)
 {
     clearAuthError();
@@ -107,13 +146,19 @@ bool BackendManager::updateProfile(const QString& nameInput, const QString& emai
         setAuthError(errorMessage);
         return false;
     }
-    g_currentUser.name = name.toStdString(); g_currentUser.email = email.toStdString();
+    g_currentUser.name = name.toStdString(); 
+    g_currentUser.email = email.toStdString();
     ++m_dataRevision;
     emit dataChanged();
     qInfo().noquote() << "Profile updated for user" << m_currentUserId;
     return true;
 }
 
+// ==========================================
+// EXPENSE MANAGEMENT MODULE
+// ==========================================
+
+// Creates and stores a new expense record linked to m_currentUserId
 bool BackendManager::addExpense(const QString& title, double amount, const QString& category, const QString& date, const QString& note)
 {
     g_lastExpenseError.clear();
@@ -124,6 +169,8 @@ bool BackendManager::addExpense(const QString& title, double amount, const QStri
         g_lastExpenseError = errorMessage.toStdString();
         return false;
     }
+    
+    // Increments revision counter to update analytical UI components
     ++m_dataRevision;
     emit dataChanged();
     qInfo().noquote() << "Expense saved for user" << m_currentUserId << "category" << category;
@@ -133,6 +180,7 @@ bool BackendManager::addExpense(const QString& title, double amount, const QStri
 QString BackendManager::getLastExpenseError() { return QString::fromStdString(g_lastExpenseError); }
 void BackendManager::clearExpenseError() { g_lastExpenseError.clear(); }
 
+// Accessors returning structured QVariantList data to QML UI components
 QVariantList BackendManager::getExpenses() const
 {
     if (m_currentUserId < 0) return {};
@@ -157,6 +205,7 @@ int BackendManager::getExpenseCount() const
     return m_dataStore->loadExpenseCount(m_currentUserId);
 }
 
+// Resets all expense records belonging to the currently logged-in user
 void BackendManager::resetExpenses()
 {
     if (m_currentUserId < 0) return;
