@@ -12,18 +12,25 @@
 
 using namespace std;
 
-// ============ GLOBAL DATA (Shared with all files) ============
+// =========================================================================
+// OOP CONCEPT: Global State & Shared Data References
+// External instances shared across modules (User state, Expense collection)
+// =========================================================================
 extern vector<Expense> g_expenses;
 extern User g_currentUser;
 extern int g_nextId;
 
-// ============ MONTH RESET DATA ============
+// =========================================================================
+// MONTH RESET DATA
+// Static variables tracking monthly archived spending and reset flags
+// =========================================================================
 static vector<MonthlyArchive> g_archives;
 static string g_currentMonth = "";
 static bool g_monthResetTriggered = false;
 
 // ============ MONTH RESET HELPER FUNCTIONS ============
 
+// Formats and returns current system year-month key (YYYY-MM)
 string getCurrentMonthKey() {
     time_t now = time(nullptr);
     struct tm* tm = localtime(&now);
@@ -33,6 +40,7 @@ string getCurrentMonthKey() {
     return string(monthKey);
 }
 
+// Checks if calendar month has changed compared to last logged month
 bool isNewMonth() {
     if (g_currentMonth.empty()) {
         g_currentMonth = getCurrentMonthKey();
@@ -41,6 +49,8 @@ bool isNewMonth() {
     return g_currentMonth != getCurrentMonthKey();
 }
 
+// OOP CONCEPT: Automated State Management & Object Archiving
+// Archives current month expenses into a MonthlyArchive object when a new month begins
 bool resetMonthIfNeeded() {
     if (!isNewMonth()) {
         return false;
@@ -54,6 +64,7 @@ bool resetMonthIfNeeded() {
     cout << "  Archived " << g_expenses.size() << " expenses." << endl;
     cout << "========================================" << endl;
     
+    // Instantiate archive object and capture snapshot of expenses
     MonthlyArchive archive;
     archive.month = g_currentMonth;
     archive.archivedExpenses = g_expenses;
@@ -64,6 +75,7 @@ bool resetMonthIfNeeded() {
     }
     archive.totalSpent = total;
     
+    // Store archive in list and reset active month state
     g_archives.push_back(archive);
     
     g_expenses.clear();
@@ -79,6 +91,7 @@ bool resetMonthIfNeeded() {
 
 // ============ HOMEPAGE FUNCTIONS (BACKEND VERSION) ============
 
+// Returns personalized welcome message using user object state
 string getWelcomeMessage() {
     if (!g_currentUser.email.empty()) {
         return "Welcome, " + g_currentUser.name + "!";
@@ -86,6 +99,7 @@ string getWelcomeMessage() {
     return "Welcome to VoxSpend";
 }
 
+// Calculates sum of expenses logged in current month
 double getCurrentMonthSpending() {
     resetMonthIfNeeded();
     
@@ -100,6 +114,7 @@ double getCurrentMonthSpending() {
     return total;
 }
 
+// Helper function to format currency with thousand separators (e.g., Rs10,000)
 string getFormattedCurrentMonthSpending() {
     double amount = getCurrentMonthSpending();
     string amountStr = to_string((int)amount);
@@ -114,10 +129,13 @@ string getFormattedCurrentMonthSpending() {
     return "Rs" + formatted;
 }
 
+// OOP CONCEPT: Data Transformation & Collection Manipulation
+// Sorts expenses in reverse order and constructs RecentTransaction objects for display
 vector<RecentTransaction> getRecentTransactions(int count) {
     vector<RecentTransaction> result;
     
     vector<Expense> sorted = g_expenses;
+    // Sort transactions by highest ID (most recent first)
     sort(sorted.begin(), sorted.end(),
          [](const Expense& a, const Expense& b) {
              return a.id > b.id;
@@ -133,6 +151,7 @@ vector<RecentTransaction> getRecentTransactions(int count) {
         trans.amount = sorted[i].amount;
         trans.date = sorted[i].date;
         
+        // Formatting amount string with commas
         string amountStr = to_string((int)sorted[i].amount);
         int len = amountStr.length();
         string formatted = "";
@@ -150,14 +169,17 @@ vector<RecentTransaction> getRecentTransactions(int count) {
     return result;
 }
 
+// Checks if any expenses are logged
 bool hasTransactions() {
     return !g_expenses.empty();
 }
 
+// Returns total count of expense records
 int getTotalExpenseCount() {
     return g_expenses.size();
 }
 
+// Sums all expenses recorded across lifetime
 double getTotalSpending() {
     double total = 0.0;
     for (const auto& expense : g_expenses) {
@@ -166,6 +188,7 @@ double getTotalSpending() {
     return total;
 }
 
+// Formats total lifetime spending into formatted currency string
 string getFormattedTotalSpending() {
     double amount = getTotalSpending();
     string amountStr = to_string((int)amount);
@@ -180,6 +203,7 @@ string getFormattedTotalSpending() {
     return "Rs" + formatted;
 }
 
+// Safe getter for user display name
 string getUserDisplayName() {
     if (!g_currentUser.email.empty()) {
         return g_currentUser.name;
@@ -187,6 +211,7 @@ string getUserDisplayName() {
     return "Guest";
 }
 
+// Safe getter for user email
 string getUserDisplayEmail() {
     if (!g_currentUser.email.empty()) {
         return g_currentUser.email;
@@ -194,6 +219,7 @@ string getUserDisplayEmail() {
     return "guest@example.com";
 }
 
+// Generates greeting based on system hour (Morning / Afternoon / Evening / Night)
 string getTimeBasedGreeting() {
     time_t now = time(nullptr);
     struct tm* tm = localtime(&now);
@@ -210,6 +236,7 @@ string getTimeBasedGreeting() {
     }
 }
 
+// Combines time-based greeting with user display name
 string getFullGreeting() {
     string greeting = getTimeBasedGreeting();
     string name = getUserDisplayName();
@@ -220,12 +247,17 @@ string getFullGreeting() {
     return greeting + "!";
 }
 
+// =========================================================================
+// OOP CONCEPT: Aggregation & Data Transfer Object (DTO)
+// Computes metrics across expenses and bundles them into DashboardSummary object
+// =========================================================================
 DashboardSummary getDashboardSummary() {
     DashboardSummary summary;
     summary.totalSpent = getTotalSpending();
     summary.totalTransactions = getTotalExpenseCount();
     summary.currentMonthSpent = getCurrentMonthSpending();
     
+    // Count distinct categories used
     vector<string> categories;
     for (const auto& expense : g_expenses) {
         bool found = false;
@@ -241,6 +273,7 @@ DashboardSummary getDashboardSummary() {
     }
     summary.categoryCount = categories.size();
     
+    // Determine category with highest total spending using std::map
     if (!g_expenses.empty()) {
         map<string, double> categoryTotals;
         for (const auto& expense : g_expenses) {
@@ -265,10 +298,12 @@ DashboardSummary getDashboardSummary() {
 
 // ============ MONTH RESET FUNCTIONS ============
 
+// Accessor returning historical monthly archive collection
 vector<MonthlyArchive> getMonthlyArchives() {
     return g_archives;
 }
 
+// Searches and returns archive object for specific month
 MonthlyArchive getMonthSummary(const string& month) {
     for (const auto& archive : g_archives) {
         if (archive.month == month) {
@@ -278,6 +313,7 @@ MonthlyArchive getMonthSummary(const string& month) {
     return MonthlyArchive();
 }
 
+// Returns total spending recorded in previous archived month
 double getPreviousMonthSpending() {
     if (g_archives.empty()) {
         return 0.0;
@@ -285,6 +321,7 @@ double getPreviousMonthSpending() {
     return g_archives.back().totalSpent;
 }
 
+// Returns label/key for previous month
 string getPreviousMonthName() {
     if (g_archives.empty()) {
         return "No previous month";
@@ -292,6 +329,7 @@ string getPreviousMonthName() {
     return g_archives.back().month;
 }
 
+// Computes month-over-month spending difference and percentage comparison
 MonthlyComparison getMonthComparison() {
     MonthlyComparison comp;
     comp.currentMonth = getCurrentMonthKey();
@@ -313,13 +351,17 @@ MonthlyComparison getMonthComparison() {
     return comp;
 }
 
+// Resets archive store
 void clearArchives() {
     g_archives.clear();
     g_currentMonth = getCurrentMonthKey();
     cout << "All archives cleared." << endl;
 }
 
-// ============ QML EXPOSED FUNCTIONS (with Qml suffix) ============
+// =========================================================================
+// OOP CONCEPT: Interface Bridge / QML Wrappers
+// Exposes standard C++ strings as C-strings (const char*) for QML UI binding
+// =========================================================================
 
 const char* getWelcomeMessageQml() {
     static string msg = getWelcomeMessage();
